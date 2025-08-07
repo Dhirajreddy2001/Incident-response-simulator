@@ -44,3 +44,6 @@ simulation python scripts/simulate_error.py http500
 python scripts/simulate_error.py cpu
 python scripts/simulate_error.py crash
 python scripts/simulate_error.py memory
+
+
+![Build Status](https://github.com/Dhirajreddy2001/incident/actions/workflows/simulate_incident.yml/badge.svg)
