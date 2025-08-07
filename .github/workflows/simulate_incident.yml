@@ -1,32 +1,34 @@
 name: Simulate Incident
+
 on:
-    workflow_dispatch:
-        inputs:
-            error_type:
-                description: 'Type of error to simulate'
-                required: true
-                default: "http500"
-                type: choice
-                options:
-                    - http500
-                    - cpu
-                    - memory
-                    - crash
+  workflow_dispatch:
+    inputs:
+      error_type:
+        description: 'Type of error to simulate'
+        required: true
+        default: "http500"
+        type: choice
+        options:
+          - http500
+          - cpu
+          - memory
+          - crash
 
 jobs:
-    simulate_incident:
-        runs-on: ubuntu-latest
+  simulate_incident:
+    runs-on: ubuntu-latest
 
-        steps:
-            -name: Chcekout coode
-             uses: actions/setup-python@v4
-             with:
-                python-version: "3.10"
-            
-            - name: Install Dependencies
-              run: pip install - requirements.txt || echo "No Dpendencies to install"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-            - name: Run Incident Script
-                run: python scripts/simulate_error.py ${{ github.event.inputs.error_type}}
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
-            
+      - name: Install Dependencies
+        run: pip install -r requirements.txt || echo "No Dependencies to install"
+
+      - name: Run Incident Script
+        run: python scripts/simulate_error.py ${{ github.event.inputs.error_type }}
