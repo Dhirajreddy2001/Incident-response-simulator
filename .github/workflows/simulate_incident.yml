@@ -34,6 +34,7 @@ jobs:
         run: python scripts/incident_simulation.py ${{ github.event.inputs.error_type }}
         
       - name: Send SNS Alert via AWS
+        if: always()
         run: |
             aws sns publish \
             --topic-arn  ${{ secrets.SNS_TOPIC_ARN}} \
